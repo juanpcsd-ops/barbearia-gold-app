@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Barbearia Gold</title>
+<style>
+:root{font-family:system-ui,sans-serif;color:#f7e7c1;background:#100d0b}*{box-sizing:border-box}body{margin:0}header{padding:28px 20px;text-align:center;background:linear-gradient(135deg,#17110a,#392614);border-bottom:2px solid #b98d3e}h1{color:#e7bd67;margin:0}main{max-width:860px;margin:auto;padding:20px}.panel{background:#211a14;border:1px solid #8b6b36;border-radius:16px;padding:20px;margin:16px 0}button,select,input{padding:12px;border-radius:9px;font:inherit}button{background:#caa456;color:#1c1306;border:0;font-weight:700;cursor:pointer}button:disabled{opacity:.5}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.service{padding:16px;background:#302318;border-radius:12px}.muted{color:#c8b99e}label{display:block;margin:12px 0}select,input{width:100%;background:#fff;color:#1d1d1d;border:0}#notice{padding:12px;color:#ffd77b}
+</style></head><body>
+<header><h1>✂ BARBEARIA GOLD</h1><p>Seu estilo, nossa assinatura</p></header>
+<main><section class="panel"><h2>Serviços</h2><div id="services" class="grid"></div></section>
+<section class="panel"><h2>Simulação de agendamento</h2><p class="muted">Esta demonstração não cria reservas reais nem cobra Pix.</p>
+<label>Serviço<select id="service"></select></label>
+<label>Profissional<select><option>Magdiel</option></select></label>
+<label>Data<input type="date" id="date"></label>
+<label>Horário<select id="time"></select></label>
+<button id="preview">Visualizar seleção</button><p id="notice" aria-live="polite"></p></section>
+<section class="panel"><h2>Administração</h2><p class="muted">O painel com autenticação, persistência e gestão será conectado ao backend. Não há login de produção nesta demonstração.</p></section></main>
+<script>
+const services=[['Cabelo',30,40],['Barba',20,20],['Bigode',5,5],['Sobrancelha',5,5],['Cabelo infantil',30,40],['Cabelo + barba',50,60],['Cabelo + sobrancelha',40,45],['Combo completo (nome a confirmar)',50,65],['Cabelo + pigmentação (nome a confirmar)',60,85],['Luzes',120,70],['Pintar',30,20],['Relaxamento',20,20]];
+const money=n=>n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+document.querySelector('#services').innerHTML=services.map(([n,m,p])=>'<div class="service"><strong>'+n+'</strong><p>'+m+' min · '+money(p)+'</p></div>').join('');
+const sel=document.querySelector('#service');sel.innerHTML=services.map((s,i)=>'<option value="'+i+'">'+s[0]+' — '+money(s[2])+'</option>').join('');
+const date=document.querySelector('#date'),time=document.querySelector('#time');
+date.min=new Date().toLocaleDateString('sv-SE');
+function slots(){const [y,m,d]=(date.value||'').split('-').map(Number);if(!y){time.innerHTML='<option>Escolha uma data</option>';return}const day=new Date(y,m-1,d).getDay(),start=day===1?810:day===6?570:780,end=day===6?1320:1200,duration=services[Number(sel.value)][1];time.innerHTML=day===0?'<option>Fechado aos domingos</option>':Array.from({length:Math.floor((end-start-duration)/30)+1},(_,i)=>{const x=start+i*30;return '<option>'+String(Math.floor(x/60)).padStart(2,'0')+':'+String(x%60).padStart(2,'0')+'</option>'}).join('');}
+sel.addEventListener('change',slots);date.addEventListener('change',slots);slots();
+document.querySelector('#preview').onclick=()=>{document.querySelector('#notice').textContent=date.value&&time.value&&!time.value.includes('Fechado')?'Demonstração: '+services[Number(sel.value)][0]+' com Magdiel em '+date.value+' às '+time.value+'. Nenhum horário foi reservado.':'Selecione uma data e horário válidos.'};
+</script></body></html>
