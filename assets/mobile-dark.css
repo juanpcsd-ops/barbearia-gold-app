@@ -1,0 +1,75 @@
+/* Barbearia Gold — tema dark mobile-first */
+:root{--ink:#f4e9d2;--paper:#0e0d0c;--cream:#181512;--gold:#d4a750;--dark:#100f0d;--line:#42321d;color:var(--ink);background:var(--paper);color-scheme:dark}
+html,body{width:100%;max-width:100%;overflow-x:hidden}
+body{background:#0e0d0c}
+.container{max-width:1050px}
+.top{background:#090807;color:#c9a15d}
+.nav{background:#12100e;border-bottom-color:#49351c}
+.identity strong{color:#e8c57a}.identity small{color:#d7a954}
+.navlinks button{color:#d8c6a7}.navlinks button.on{color:#efc778;border-color:#d4a750}
+.btn{color:#f0d5a2;border-color:#906d3c;background:#221a12;max-width:100%;white-space:normal}
+.btn.gold{background:linear-gradient(125deg,#edc579,#ad7930);color:#17110b;border-color:#bd8c47}
+.btn.dark{background:#b58a4c;color:#140f0a;border-color:#b58a4c}
+.hero{background:linear-gradient(95deg,#0b0a09ed,#0b0a0994),url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1100&q=80') center/cover}
+.section,.section.alt,.section.dark{background:#0e0d0c;color:#f4e9d2}
+.section.alt{background:#15120f}
+.section.dark{background:#1b1712}
+.heading h2,.panel h2,.section h1,.adminhead h1{color:#f3d39b}
+.muted{color:#b4a38c}.dark .muted{color:#b4a38c}
+.service,.panel,.stat{background:#1d1813;border-color:#473620;color:#f4e9d2}
+.service h3,.feature b{color:#f4dfb6}
+.price,.stat strong{color:#eac077}
+.pill,.badge{background:#3d2b16;color:#f0c879;border-color:#8b693a}
+.feature{border-color:#88673d}
+input,select{background:#14110e;border-color:#715634;color:#fff9e9;min-width:0;max-width:100%;font-size:16px}
+input::placeholder{color:#968771}
+.summary{background:#2b2116;color:#f5e8cf}
+.listitem{border-color:#443522}
+.adminhead{background:#17120e;color:#f3e1bf}
+.footer{background:#090807}
+.toast{background:#d7ac63;color:#18100a}
+.tablewrap{overflow:visible}
+table{min-width:0}
+th,td{border-color:#48361f}
+th{color:#e2b86b}
+.portrait{background:linear-gradient(0deg,#1118,#1112),url('https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=900&q=80') center/cover}
+@media(max-width:700px){
+ .container{padding:0 14px}
+ .top{padding:8px 5px;font-size:9px;letter-spacing:1px}
+ .nav{position:static}
+ .navinner{display:block;padding:12px 0}
+ .identity{justify-content:center}
+ .identity img{width:58px;height:58px}
+ .navlinks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;margin-top:10px}
+ .navlinks button{padding:11px 2px;font-size:11px;line-height:1.25;min-width:0}
+ .hero{min-height:420px}
+ .hero h1{font-size:clamp(42px,12vw,65px)}
+ .hero p{font-size:15px}
+ .section{padding:38px 0}
+ .heading{display:block}
+ .heading .btn{margin-top:12px}
+ .cards,.features,.formgrid{grid-template-columns:1fr;gap:11px}
+ .service{min-height:125px;padding:18px}
+ .service h3{font-size:22px}
+ .panel{padding:16px;margin:16px 0}
+ .panel h2{font-size:28px}
+ .formgrid{gap:14px}
+ .btn{min-height:44px}
+ .statgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .stat{padding:13px;min-width:0}
+ .stat strong{font-size:26px;overflow-wrap:anywhere}
+ .stat .muted{font-size:12px}
+ .tablewrap{overflow:visible}
+ table,tbody,tr,td{display:block;width:100%;min-width:0}
+ thead{display:none}
+ tr{padding:14px;margin:0 0 12px;background:#251d15;border:1px solid #6b4b28;border-radius:9px}
+ td{padding:6px 0;border:0;overflow-wrap:anywhere}
+ td::before{content:attr(data-label);display:block;color:#d3a860;font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px}
+ td:last-child{display:flex;flex-wrap:wrap;gap:8px}
+ td:last-child::before{width:100%}
+ td .btn{flex:1;padding:9px 10px}
+ .row{gap:9px}
+ .adminhead{padding:25px 0}
+ .adminhead h1{font-size:35px}
+ .footer .row{justify-content:center;text-align:center}
+}
