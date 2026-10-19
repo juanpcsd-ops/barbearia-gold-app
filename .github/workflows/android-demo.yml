@@ -25,7 +25,14 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'
-      - uses: android-actions/setup-android@v3
+      - name: Configure Android SDK (preinstalled on GitHub runner)
+        shell: bash
+        run: |
+          echo "ANDROID_HOME=$ANDROID_SDK_ROOT" >> "$GITHUB_ENV"
+          echo "$ANDROID_SDK_ROOT/platform-tools" >> "$GITHUB_PATH"
+          echo "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin" >> "$GITHUB_PATH"
+          test -d "$ANDROID_SDK_ROOT" || { echo "Android SDK missing"; exit 1; }
+          echo "Android SDK found at $ANDROID_SDK_ROOT"
       - name: Install dependencies
         run: npm install --no-audit --no-fund
       - name: Prepare static website
