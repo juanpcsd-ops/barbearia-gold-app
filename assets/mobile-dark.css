@@ -73,3 +73,30 @@ th{color:#e2b86b}
  .adminhead h1{font-size:35px}
  .footer .row{justify-content:center;text-align:center}
 }
+
+/* Entrada dedicada: sem menus, conteúdo ou rodapé antes da autenticação */
+[hidden],.hidden{display:none!important}
+body.guest-mode .top,body.guest-mode .nav,body.guest-mode .footer{display:none!important}
+body.guest-mode main>.view:not(#account){display:none!important}
+body.guest-mode #account{display:block!important}
+body.guest-mode{min-height:100dvh;background:radial-gradient(circle at 50% 5%,#332315 0%,#100e0c 50%,#090807 100%)}
+body.guest-mode #account .section{background:transparent!important;padding:20px 0 40px;min-height:100dvh}
+body.logged-mode #account{display:none!important}
+.auth-container{max-width:450px!important;margin:auto;padding:0 18px!important}
+.auth-header{text-align:center}
+.auth-logo{display:block;width:min(64vw,248px);height:auto;aspect-ratio:1;margin:0 auto 8px;filter:drop-shadow(0 8px 25px #0009)}
+.auth-header h1{font:clamp(28px,7vw,37px) Georgia,serif!important;margin:8px 0;color:#f1cf8d}
+.auth-header .muted{font-size:14px;line-height:1.5;margin:8px 0 18px}
+.auth-panel{padding:20px!important;margin:0!important;border-radius:17px;border:1px solid #71502a!important;background:#17130ff5!important;box-shadow:0 18px 50px #0007}
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px}
+.auth-tabs button{padding:13px 6px;border-radius:9px;border:1px solid #634725;background:#221b14;color:#d7bea0;font-size:13px;font-weight:700}
+.auth-tabs button.selected{background:#d6a858;color:#191109;border-color:#d6a858}
+.auth-panel form{display:grid;gap:15px}
+.auth-panel form label{display:grid;gap:7px;color:#e8d3ac;font-size:13px;font-weight:600}
+.auth-panel input{width:100%;height:48px;border-radius:9px;padding:0 12px;box-sizing:border-box}
+.auth-submit{width:100%;margin-top:4px;min-height:49px}
+.auth-note{border-top:1px solid #49351e;margin-top:18px;padding-top:15px;color:#bfae96;font-size:12px;line-height:1.5}
+.auth-note strong{color:#d9b06a}.auth-note p{margin:5px 0 10px}
+.auth-note summary{cursor:pointer;color:#e8c98e;padding:8px 0}
+.auth-note code{color:#f1d7a3;overflow-wrap:anywhere}
+@media(max-width:700px){.navlinks{grid-template-columns:repeat(4,minmax(0,1fr))}.navlinks button[hidden]{display:none!important}.auth-logo{width:min(62vw,230px)}}
