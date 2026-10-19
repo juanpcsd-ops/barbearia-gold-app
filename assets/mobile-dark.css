@@ -100,3 +100,14 @@ body.logged-mode #account{display:none!important}
 .auth-note summary{cursor:pointer;color:#e8c98e;padding:8px 0}
 .auth-note code{color:#f1d7a3;overflow-wrap:anywhere}
 @media(max-width:700px){.navlinks{grid-template-columns:repeat(4,minmax(0,1fr))}.navlinks button[hidden]{display:none!important}.auth-logo{width:min(62vw,230px)}}
+
+/* Edição compacta do catálogo e equipe */
+.manage-list{display:grid;gap:12px;margin:18px 0 24px}
+.manage-item{background:#211a13;border:1px solid #5a4126;border-radius:12px;padding:14px}
+.manage-fields,.manage-form{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px;align-items:end}
+.manage-fields label,.manage-form label{display:grid;gap:6px;font-size:12px;color:#d9bd90}
+.manage-fields input,.manage-fields select,.manage-form input{width:100%;box-sizing:border-box;padding:10px;border-radius:8px;min-height:43px}
+.manage-actions{display:flex;gap:8px;margin-top:12px}
+.manage-form{margin:12px 0 22px}
+.manage-form .btn{min-height:44px}
+@media(max-width:700px){.manage-fields,.manage-form{grid-template-columns:1fr 1fr}.manage-fields label:first-child,.manage-form label:first-child{grid-column:1/-1}.manage-form .btn{grid-column:1/-1}.manage-item{padding:12px}}
