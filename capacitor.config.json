@@ -1,0 +1,11 @@
+{
+  "appId": "br.com.barbeariagold.demo",
+  "appName": "Barbearia Gold Demo",
+  "webDir": "www",
+  "android": {
+    "allowMixedContent": false
+  },
+  "server": {
+    "androidScheme": "https"
+  }
+}
