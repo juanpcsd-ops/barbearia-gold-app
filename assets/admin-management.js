@@ -12,6 +12,17 @@ function persist(){localStorage.setItem(svcKey,JSON.stringify(services));localSt
 function refresh(){
  const oldService=$('service').value,oldPro=$('professional').value;
  $('catalog').innerHTML=services.map((s,i)=>'<article class="service"><div><h3>'+esc(s[0])+'</h3><p class="muted">⏱ '+s[1]+' minutos</p></div><div class="row"><span class="price">'+money(s[2])+'</span><button class="btn" onclick="choose('+i+')">Escolher</button></div></article>').join('')||'<p class="muted">Nenhum serviço disponível.</p>';
+ const images=[
+ 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=450&q=75',
+ 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=450&q=75',
+ 'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=450&q=75',
+ 'https://images.unsplash.com/photo-1622296089863-eb7fc530daa8?auto=format&fit=crop&w=450&q=75'
+ ];
+ const imageFor=(name,i)=>/barba/i.test(name)?images[1]:/sobrancelha/i.test(name)?images[3]:images[i%images.length];
+ const card=(svc,i)=>'<article class="gold-service-card"><img src="'+imageFor(svc[0],i)+'" alt="" loading="lazy"><div class="gold-service-copy"><h3>'+esc(svc[0])+'</h3><p>'+svc[1]+' minutos</p><div class="gold-service-bottom"><strong>'+money(svc[2])+'</strong><button onclick="choose('+i+')">Agendar</button></div></div></article>';
+ $('catalog').innerHTML=services.map(card).join('')||'<p class="muted">Nenhum serviço disponível.</p>';
+ $('homeCatalog').innerHTML=services.slice(0,4).map(card).join('');
+ $('quickServices').innerHTML=services.slice(0,4).map((svc,i)=>'<button class="quick-tile" onclick="choose('+i+')"><img src="'+imageFor(svc[0],i)+'" alt="" loading="lazy"><span>'+esc(svc[0])+'</span></button>').join('');
  $('service').innerHTML=services.map((s,i)=>'<option value="'+i+'">'+esc(s[0])+' · '+money(s[2])+'</option>').join('');
  if([...$('service').options].some(o=>o.value===oldService))$('service').value=oldService;
  $('professional').innerHTML=pros.filter(p=>p.active).map(p=>'<option value="'+esc(p.id)+'">'+esc(p.name)+'</option>').join('');
