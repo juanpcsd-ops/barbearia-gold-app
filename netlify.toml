@@ -1,0 +1,17 @@
+# Barbearia Gold — site estático gerado a partir do mesmo código do APK.
+[build]
+  command = "npm run prepare:web"
+  publish = "www"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
