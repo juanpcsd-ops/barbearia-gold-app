@@ -1,0 +1,54 @@
+name: Video de apresentacao Barbearia Gold
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  video:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Instalar navegador para capturar as telas
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+      - name: Capturar telas demonstrativas do aplicativo
+        run: |
+          mkdir -p video-frames
+          cat > /tmp/gold-video.cjs <<'EOF'
+          const { chromium }=require(process.cwd()+'/node_modules/playwright');
+          (async()=>{
+            const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
+            const page=await browser.newPage({viewport:{width:390,height:844},deviceScaleFactor:1});
+            await page.goto('file://'+process.cwd()+'/index.html',{waitUntil:'load'});
+            await page.screenshot({path:'video-frames/01.png'});
+            await page.evaluate(()=>{ if(typeof openGoldAuth==='function')openGoldAuth('login') });
+            await page.screenshot({path:'video-frames/02.png'});
+            await page.evaluate(()=>{ if(typeof openGoldAuth==='function')openGoldAuth('register') });
+            await page.screenshot({path:'video-frames/03.png'});
+            await page.evaluate(()=>{ if(typeof setSession==='function')setSession({name:'Cliente Gold',email:'cliente@demo.local',phone:'11999999999',role:'client'}) });
+            for(const [i,id] of ['home','services','booking','mine','profile'].entries()){
+              await page.evaluate(id=>page(id),id).catch(()=>{});
+              await page.screenshot({path:'video-frames/'+String(i+4).padStart(2,'0')+'.png'});
+            }
+            await page.evaluate(()=>{ if(typeof setSession==='function')setSession({name:'Administrador',email:'admin@gold.demo',phone:'',role:'admin'}) });
+            await page.screenshot({path:'video-frames/09.png'});
+            await browser.close();
+          })().catch(e=>{console.error(e);process.exit(1)});
+          EOF
+          node /tmp/gold-video.cjs
+      - name: Montar video MP4 e ZIP
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg zip
+          mkdir -p output
+          ffmpeg -y -framerate 1/4 -i 'video-frames/%02d.png' -vf 'fps=25,format=yuv420p' -c:v libx264 -pix_fmt yuv420p -movflags +faststart output/Barbearia_Gold_Apresentacao.mp4
+          cd output && zip Barbearia_Gold_Apresentacao.zip Barbearia_Gold_Apresentacao.mp4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Barbearia-Gold-Video-ZIP
+          path: output/Barbearia_Gold_Apresentacao.zip
+          retention-days: 30
