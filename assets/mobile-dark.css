@@ -186,3 +186,25 @@ body.logged-mode:not(:has(#admin.active)) .footer{display:none}
 .confirmation-screen>.btn{display:block;width:100%;margin:10px 0}
 @media(min-width:750px){.quick-services{grid-template-columns:repeat(4,1fr)}.quick-tile{height:190px}.service-catalog{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:700px){.app-home,.app-section{padding-top:16px!important}.home-brand img{width:92px;height:92px}.navlinks{grid-template-columns:repeat(4,minmax(0,1fr))}}
+
+/* Gold splash — apresentação full-screen com visual fotográfico */
+body.guest-mode #account .section{display:block!important;padding:0!important;min-height:100dvh;background:#050505!important}
+body.guest-mode .auth-container{padding:0!important;max-width:480px!important}
+.gold-splash{position:relative;min-height:100dvh;min-height:100svh;background:#060505;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.gold-splash::before{content:"";position:absolute;inset:0 0 19%;background-image:linear-gradient(180deg,#0000 34%,#050505 94%),url('https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=900&q=85');background-size:cover;background-position:50% 24%;filter:brightness(.72) saturate(.8)}
+.gold-splash::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 0%,transparent 34%,#05050522 45%,#050505 81%);pointer-events:none}
+.splash-visual{z-index:1;position:relative;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:20px 18px 10px;min-height:390px}
+.splash-logo{width:min(65vw,265px);height:auto;max-height:240px;object-fit:contain;filter:drop-shadow(0 5px 12px #000b)}
+.splash-tagline{font-size:clamp(10px,2.5vw,13px);font-weight:750;letter-spacing:3px;color:#e9c381;text-align:center;margin-top:2px;text-shadow:0 2px 9px #000}
+.splash-actions{z-index:1;position:relative;display:grid;gap:12px;padding:35px 24px max(24px,env(safe-area-inset-bottom));width:100%}
+.splash-actions button{height:58px;border-radius:12px;font-size:17px;font-weight:750;width:100%;cursor:pointer}
+.splash-enter{background:linear-gradient(110deg,#b9853f,#edc279);border:1px solid #d8ad68;color:#120e08}
+.splash-create{background:#080808a6;border:1.5px solid #d6aa68;color:#fff}
+.splash-actions p{text-align:center;color:#9c9188;font-size:13px;margin:24px 0 0}
+.gold-auth-content{padding:20px 18px 38px;min-height:100svh;background:linear-gradient(180deg,#20160d,#080808 48%)}
+.gold-back{border:0;background:none;color:#eac282;padding:10px 0;font-size:14px}
+.gold-auth-content .auth-logo{width:min(35vw,135px);margin:4px auto}
+.gold-auth-content .auth-header h1{font-size:22px!important}
+.gold-auth-content .auth-header .muted{margin-bottom:12px}
+.gold-auth-content .auth-panel{padding:16px!important}
+@media(min-width:700px){body.guest-mode #account .section{display:flex!important;justify-content:center}.gold-splash{min-height:850px;max-height:960px}.gold-splash::before{background-position:center 22%}}
