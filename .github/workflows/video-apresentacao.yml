@@ -31,7 +31,7 @@ jobs:
             await page.screenshot({path:'video-frames/03.png'});
             await page.evaluate(()=>{ if(typeof setSession==='function')setSession({name:'Cliente Gold',email:'cliente@demo.local',phone:'11999999999',role:'client'}) });
             for(const [i,id] of ['home','services','booking','mine','profile'].entries()){
-              await page.evaluate(id=>page(id),id).catch(()=>{});
+              await page.evaluate(id=>window.page(id),id).catch(()=>{});
               await page.screenshot({path:'video-frames/'+String(i+4).padStart(2,'0')+'.png'});
             }
             await page.evaluate(()=>{ if(typeof setSession==='function')setSession({name:'Administrador',email:'admin@gold.demo',phone:'',role:'admin'}) });
